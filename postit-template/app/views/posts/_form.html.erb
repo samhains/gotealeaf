@@ -1,0 +1,30 @@
+<% if @post.errors.any? %>
+<div class="row">
+  <div class='alert alert-error span8'>
+    
+      <h4> The Following Errors Occurred: </h4>
+        <% @post.errors.full_messages.each do |error| %>
+          <li> <%=error %> </li>
+        <% end %>
+  </div>
+</div>
+<% end %>
+
+<div class = "well">
+  <%= form_for @post do |f| %>
+    <div class='control-group'>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    </div>
+    
+    <div class='control-group'>
+      <%= f.label :user_id %>
+      <%= f.text_field :user_id %>
+    </div>
+    <div class='control-group'>
+      <%= f.label :description %>
+      <%= f.text_area :description, rows: 5 %> <br>
+    </div>
+    <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
+</div>

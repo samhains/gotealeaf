@@ -1,10 +1,10 @@
 class CreatePostCategory < ActiveRecord::Migration
   def change
-    create_table :post_category do |t|
+    create_table :post_categories do |t|
       t.integer :post_id
       t.integer :category_id
     end
-    add_index :post_category, :post_id
-    add_index :post_category, :catgory_id
+    add_index :post_categories, :post_id
+    add_index :post_categories, :category_id
   end
 end
