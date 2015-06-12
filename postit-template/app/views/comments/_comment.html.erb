@@ -1,0 +1,8 @@
+<div class="well">
+    <em>" <%= comment.body %> "</em> <% if link_to %>
+      <span> from <%= link_to comment.post.title, post_path(comment.post)  %></span>
+    <% end %>
+    <p><span class='quiet'>posted by</span> <%=comment.creator.username%></p> 
+    
+    <small> @ <%=date_fix comment.created_at%> </small>
+</div>

@@ -4,7 +4,9 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
   end
+  
   def show
+    @comment = Comment.new
   end
 
   def new
@@ -13,6 +15,9 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @user = current_user
+    @post.creator = @user
+
     if @post.save
       flash[:notice] = "Post Has Been Saved"
       redirect_to posts_path
@@ -25,6 +30,7 @@ class PostsController < ApplicationController
   end
 
   def update
+  
     if @post.update(post_params)
       flash[:notice] = "Post Updated!"
       redirect_to posts_path
@@ -35,7 +41,7 @@ class PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:title, :description, :user_id)
+    params.require(:post).permit(:title, :description, :user_id, :category_ids => [])
   end
   def find_post_by_id
     @post = Post.find(params[:id])

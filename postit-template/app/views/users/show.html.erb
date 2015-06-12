@@ -1,0 +1,10 @@
+<%= render 'shared/content_title', title: "#{@user.username.titleize}'s Profile" %>
+
+<h4><%= "#{@user.username.titleize}'s Activity" %></h4>
+<hr/>
+
+<h4><%= "#{@user.username.titleize}'s Posts" %></h4>
+<%= render @user.posts %>
+<h4><%= "#{@user.username.titleize}'s Comments" %></h4>
+
+<%= render @user.comments, link_to:  true %>

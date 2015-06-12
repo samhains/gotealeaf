@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150608225142) do
+ActiveRecord::Schema.define(version: 20150612155444) do
 
   create_table "categories", force: true do |t|
     t.string "name"
   end
 
   create_table "comments", force: true do |t|
-    t.text    "body"
-    t.integer "user_id"
-    t.integer "post_id"
+    t.text      "body"
+    t.integer   "user_id"
+    t.integer   "post_id"
+    t.timestamp "created_at"
   end
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
@@ -44,6 +45,7 @@ ActiveRecord::Schema.define(version: 20150608225142) do
 
   create_table "users", force: true do |t|
     t.string "username"
+    t.string "password_digest"
   end
 
 end
