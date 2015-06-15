@@ -12,6 +12,17 @@ class CommentsController < ApplicationController
     end
   end
 
+  def vote
+    @user = current_user
+    @comment = Comment.find(params[:id])
+
+    old_vote = Vote.remove_old_vote(@comment, @user.id)
+    @vote = Vote.new(vote: params[:direction], user_id: @user.id)
+    @vote.voteable = @comment
+    if @vote.save
+      render json: {new_vote: @vote, old_vote: old_vote}
+    end
+  end
 
   private
 

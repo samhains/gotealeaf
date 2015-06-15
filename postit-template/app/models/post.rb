@@ -3,7 +3,7 @@ class Post < ActiveRecord::Base
   has_many :comments, inverse_of: :post
   has_many :post_categories
   has_many :categories, through: :post_categories
-
+  has_many :votes ,  as: :voteable
   validates :title, presence: true, length: {minimum: 5}
   validates :description, presence: true
 

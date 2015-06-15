@@ -8,6 +8,7 @@ Bundler.require(:default, Rails.env)
 
 module PostitTemplate
   class Application < Rails::Application
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -22,6 +23,7 @@ module PostitTemplate
     config.react.jsx_transform_options = {
       harmony: true
     }
+    config.react.addons = true
     # Tealeaf note: Bootstrap sass gem addition
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
   end

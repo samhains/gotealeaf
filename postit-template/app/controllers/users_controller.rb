@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  before_action :require_user, except: [:create, :vote, :new]
+  before_action :get_user, only: [:show, :update, :edit]
+  before_action :require_same_user, only: [:edit, :update]
+
   def new
     @user = User.new
   end
@@ -16,12 +20,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
-    
   end
 
   def update
-    @user = current_user
     @user.update(user_params)
     if @user.save
       flash[:notice] = "User has been updated successfully"
@@ -32,13 +33,34 @@ class UsersController < ApplicationController
 
   end
 
+
+
   def edit
-    @user = current_user
+  end
+
+  def vote
+    render json:{vote:current_user.votes}
+    
   end
 
   private
   def user_params
     params.require(:user).permit(:username,:password)
 
+  end
+
+  def get_user
+    if User.exists?(params[:id])
+      @user = User.find params[:id]
+    else
+      flash[:error] = "You cannot go there."
+      redirect_to root_path
+    end
+  end
+  def require_same_user
+    if current_user != @user
+      flash[:error] = "You can't do that!"
+      redirect_to root_path
+    end
   end
 end

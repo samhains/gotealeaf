@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       flash[:notice] = "Successfully Logged In!"
       redirect_to root_path
     else
-      flash[:notice] = "Something Wrong with your Log In!"
+      flash[:error] = "Something Wrong with your Log In!"
       render 'sessions/new'
     end
   end

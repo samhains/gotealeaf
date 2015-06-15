@@ -12,12 +12,13 @@
 <p><%= @post.description %>
 <hr/></p>
 <p><%=link_to 'back', posts_path %></p>
-
-<%= form_for [@post, @comment] do |f| %>
-  <%= f.label :body, 'Leave a comment' %>
-  <%= f.text_area :body, rows: 3, class: 'span4' %>
-  <br>
-  <%= f.submit class: 'btn btn-primary' %>
+<% if logged_in? %>
+  <%= form_for [@post, @comment] do |f| %>
+    <%= f.label :body, 'Leave a comment' %>
+    <%= f.text_area :body, rows: 3, class: 'span4' %>
+    <br>
+    <%= f.submit class: 'btn btn-primary' %>
+  <% end %>
 <% end %>
 
 <%= render @post.comments, link_to: false %>
