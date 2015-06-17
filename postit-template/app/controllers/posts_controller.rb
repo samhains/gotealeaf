@@ -4,8 +4,9 @@ class PostsController < ApplicationController
   before_action :require_user, only: [:new, :create] 
 
   def index
-    @posts = Post.all
+    @posts = Post.all.sort_by{|post| post.total_votes}.reverse
   end
+
   def show
     @comment = Comment.new
   end

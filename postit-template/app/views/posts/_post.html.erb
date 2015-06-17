@@ -1,6 +1,6 @@
 <div class="row">
   <% if logged_in? %>
-  <%= react_component :VoteBox, votes: post.votes, url: "/posts/#{post.id}/vote", last_vote: current_user.get_users_last_vote(post) %>
+  <%= react_component :VoteBox, votes: post.votes, url: vote_post_path(post), total_votes: post.total_votes,last_vote: current_user.get_users_last_vote(post) %>
   <% end %>
   
   <div class='span8 well'>

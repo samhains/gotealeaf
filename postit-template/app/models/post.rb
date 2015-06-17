@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  include CountVotes
   belongs_to :creator, foreign_key: :user_id, class_name: :User
   has_many :comments, inverse_of: :post
   has_many :post_categories
@@ -6,5 +7,7 @@ class Post < ActiveRecord::Base
   has_many :votes ,  as: :voteable
   validates :title, presence: true, length: {minimum: 5}
   validates :description, presence: true
+
+
 
 end

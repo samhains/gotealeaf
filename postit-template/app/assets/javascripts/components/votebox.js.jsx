@@ -2,16 +2,10 @@
 var VoteBox = React.createClass({
   getInitialState(){
     return {
-      totalVotes: this.calculateCurrentVotes(),
+      totalVotes: this.props.total_votes,
       lastVote: this.props.last_vote,
       voted: this.props.last_vote === null ? false : true
-    }
-  },
-  calculateCurrentVotes(){
-    console.log(this.props.votes);
-    return this.props.votes.reduce(function(votes, curr, index){
-      return curr.vote? votes+1 : votes-1;
-    },0);
+    };
   },
   updateVotes(direction){
     direction ? this.setState({totalVotes: this.state.totalVotes+1}) : this.setState({totalVotes:this.state.totalVotes-1});
@@ -19,7 +13,7 @@ var VoteBox = React.createClass({
   },
   handleVote(direction){
     if(this.state.lastVote == direction){
-      return
+      return;
     }
 
 
@@ -69,14 +63,14 @@ class ArrowButton extends React.Component{
       });
     return (
       <i onClick={this.handleClick.bind(this)} className={classes}></i>
-      )
+      );
   }
 }
 
 class TotalVotes extends React.Component{
   render(){
     return (
-      <p> {this.props.votes} </p>)
+      <p> {this.props.votes} </p>);
   }
 }
 
